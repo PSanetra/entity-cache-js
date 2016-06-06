@@ -1,3 +1,9 @@
+.idea
+
+dist/dev
+
+typings
+
 # Logs
 logs
 *.log

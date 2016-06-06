@@ -1,0 +1,6 @@
+typings
+dist/dev
+src
+spec
+tsconfig.json
+typings.json

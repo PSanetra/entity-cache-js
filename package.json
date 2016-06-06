@@ -1,0 +1,43 @@
+{
+  "name": "entity-cache-js",
+  "version": "0.1.1",
+  "description": "entity-cache-js caches unique entities in one cache per application. It prevents having multiple instances of the same entity in one application. entity-cache-js also resolves references to other objects of other caches.",
+  "main": "dist/prod/index.js",
+  "directories": {
+    "test": "spec"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psanetra/entity-cache-js.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "TypeScript",
+    "entity",
+    "cache"
+  ],
+  "author": "PSanetra",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/psanetra/entity-cache-js/issues"
+  },
+  "homepage": "https://github.com/psanetra/entity-cache-js#readme",
+  "devDependencies": {
+    "gulp": "3.9.1",
+    "gulp-clean": "0.3.2",
+    "gulp-jasmine": "2.3.0",
+    "gulp-typescript": "2.13.6",
+    "jasmine": "2.4.1",
+    "merge2": "1.0.2",
+    "run-sequence": "1.2.1",
+    "typescript": "1.8.10",
+    "typings": "1.0.4"
+  },
+  "dependencies": {
+    "systemjs": "^0.19.29"
+  }
+}
