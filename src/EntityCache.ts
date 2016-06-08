@@ -88,50 +88,55 @@ export class EntityCache<T> {
 
         if (typeof(newDataMember) === "object") {
 
-            let oldDataMemberIsArray = oldDataMember instanceof Array;
-            let newDataMemberIsArray = newDataMember instanceof Array;
+          if(!oldDataMember)
+          {
+            oldDataMember = oldData[memberName] = newDataMember
+          }
 
-            //update Array Elements
-            if(oldDataMemberIsArray && newDataMemberIsArray)
+          let oldDataMemberIsArray = oldDataMember instanceof Array;
+          let newDataMemberIsArray = newDataMember instanceof Array;
+
+          //update Array Elements
+          if(oldDataMemberIsArray && newDataMemberIsArray)
+          {
+            if(oldDataMember !== newDataMember)
             {
-              if(oldDataMember !== newDataMember)
-              {
-                oldDataMember.length = 0;
+              oldDataMember.length = 0;
 
-                Array.prototype.push.apply(oldDataMember, newDataMember);
-              }
+              Array.prototype.push.apply(oldDataMember, newDataMember);
             }
-            else if(newDataMemberIsArray)
+          }
+          else if(newDataMemberIsArray)
+          {
+            oldData[memberName] = newDataMember;
+          }
+
+          //update Array Dependencies
+          if(newDataMemberIsArray && this._entityCacheDependencyMap[memberName] != null)
+          {
+            let entityCacheDependency = this._entityCacheDependencyMap[memberName];
+            let cache = entityCacheDependency.cache;
+            let oldDataArray : Array<any> = oldData[entityCacheDependency.propName];
+
+            if(!oldDataArray)
+              oldDataArray = oldData[entityCacheDependency.propName] = [];
+
+            for(let depId of newDataMember)
             {
-              oldData[memberName] = newDataMember;
+              let element = cache.get(depId);
+
+              //element may be null and later resolved
+              oldDataArray.push(element);
+
+              if (element == null)
+                entityCacheDependency.addWaitingObject(oldData, depId, oldDataArray.length - 1);
             }
-
-            //update Array Dependencies
-            if(newDataMemberIsArray && this._entityCacheDependencyMap[memberName] != null)
-            {
-              let entityCacheDependency = this._entityCacheDependencyMap[memberName];
-              let cache = entityCacheDependency.cache;
-              let oldDataArray : Array<any> = oldData[entityCacheDependency.propName];
-
-              if(!oldDataArray)
-                oldDataArray = oldData[entityCacheDependency.propName] = [];
-
-              for(let depId of newDataMember)
-              {
-                let element = cache.get(depId);
-
-                //element may be null and later resolved
-                oldDataArray.push(element);
-
-                if (element == null)
-                  entityCacheDependency.addWaitingObject(oldData, depId, oldDataArray.length - 1);
-              }
-            }
-            else
-            {
-              //update child object
-              recursiveUpdate(newDataMember, oldDataMember, false);
-            }
+          }
+          else
+          {
+            //update child object
+            recursiveUpdate(newDataMember, oldDataMember, false);
+          }
         }
         //if newDataMember is not an object
         else {

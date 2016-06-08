@@ -115,6 +115,27 @@ describe('EntityCache', ()=>{
 
     });
 
+    it('updates original entity object property ', ()=>{
+
+      let element = new TestType(1);
+      element.objProp = undefined;
+
+      cache.updateOrInsert(element);
+
+      let updatedElement :any = {};
+
+      updatedElement[cache.identityFieldName] = 1;
+      updatedElement.objProp = {
+        someProp : 'somePropValue'
+      };
+
+      cache.updateOrInsert(updatedElement);
+
+      expect(cache.entities[0]).toBe(element);
+      expect(element.objProp.someProp).toEqual('somePropValue');
+
+    });
+
     it('updates original entity array property ', ()=>{
 
       let testElement1 = 'testElement1';
