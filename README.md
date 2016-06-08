@@ -35,7 +35,7 @@ function Person(personId, motherId, fatherId, firstName, lastName, address)
   this.address = address;
 }
 
-var personCache = new EntityCache('person', Person, 'personId');
+var personCache = new entityCacheJs.EntityCache('person', Person, 'personId');
 
 personCache.addEntityCacheDependency(personCache, 'motherId', 'mother');
 personCache.addEntityCacheDependency(personCache, 'fatherId', 'father');
@@ -44,7 +44,7 @@ personCache.addEntityCacheDependency(personCache, 'fatherId', 'father');
 Add an entity instance to the cache
 
 ```js
-personCache.updateOrInsert(new Person(1, 2, 3, 'John', 'Doe'), { zip : '12345' });
+personCache.updateOrInsert(new Person(1, 2, 3, 'John', 'Doe', { zip : '12345' }));
 personCache.updateOrInsert(new Person(2, null, null, 'Julia', 'Joe'));
 personCache.updateOrInsert(new Person(3, null, null, 'Johnson', 'Doe'));
 
@@ -69,6 +69,8 @@ for(var i in personCache.entities)
 Update existing entity
 
 ```js
+console.log(johnDoe.address.zip); //prints 12345
+
 personCache.updateOrInsert({
   personId: 1,
   address : {
