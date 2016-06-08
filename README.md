@@ -47,8 +47,6 @@ Add an entity instance to the cache
 personCache.updateOrInsert(new Person(1, 2, 3, 'John', 'Doe', { zip : '12345' }));
 personCache.updateOrInsert(new Person(2, null, null, 'Julia', 'Joe'));
 personCache.updateOrInsert(new Person(3, null, null, 'Johnson', 'Doe'));
-
-console.log(personCache.get(1).mother.firstName); //prints Julia
 ```
 
 Use entities
