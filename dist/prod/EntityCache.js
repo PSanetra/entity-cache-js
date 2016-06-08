@@ -75,6 +75,9 @@ var EntityCache = (function () {
                 var newDataMember = newData[memberName];
                 var oldDataMember = oldData[memberName];
                 if (typeof (newDataMember) === "object") {
+                    if (!oldDataMember) {
+                        oldDataMember = oldData[memberName] = newDataMember;
+                    }
                     var oldDataMemberIsArray = oldDataMember instanceof Array;
                     var newDataMemberIsArray = newDataMember instanceof Array;
                     //update Array Elements
