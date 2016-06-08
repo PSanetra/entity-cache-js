@@ -1,8 +1,8 @@
 {
   "name": "entity-cache-js",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "entity-cache-js caches unique entities in one cache per application. It prevents having multiple instances of the same entity in one application. entity-cache-js also resolves references to other objects of other caches.",
-  "main": "dist/prod/index.js",
+  "main": "index.js",
   "directories": {
     "test": "spec"
   },

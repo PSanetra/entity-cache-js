@@ -15,4 +15,8 @@ gulp build
 
 sed -i -E "s/\"version\": \"[^\"]+\"/\"version\": \"$VERSION\"/" package.json
 
+cp package.json dist/prod
+
+cd dist/prod
+
 npm publish
