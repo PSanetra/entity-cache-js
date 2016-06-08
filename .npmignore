@@ -1,6 +1,11 @@
+.idea
 typings
 dist/dev
 src
 spec
 tsconfig.json
 typings.json
+*.sh
+gulpfile.js
+.editorconfig
+.npmignore
