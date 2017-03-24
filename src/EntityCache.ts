@@ -68,9 +68,6 @@ export class EntityCache<T> {
 
     let index = this.findPotentialEntitiesIndex(entityId);
 
-    if(entity === this._entities[index])
-      return;
-
     //update properties
     let recursiveUpdate = (newData : any, oldData : any, isRoot : boolean)=> {
 
